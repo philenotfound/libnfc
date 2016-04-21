@@ -212,15 +212,6 @@ pn53x_usb_scan(const nfc_context *context, nfc_connstring connstrings[], const s
           if (udev == NULL)
             continue;
 
-          // Set configuration
-          int res = usb_set_configuration(udev, 1);
-          if (res < 0) {
-            log_put(LOG_GROUP, LOG_CATEGORY, NFC_LOG_PRIORITY_ERROR, "Unable to set USB configuration (%s)", _usb_strerror(res));
-            usb_close(udev);
-            // we failed to use the device
-            continue;
-          }
-
           // pn53x_usb_get_usb_device_name (dev, udev, pnddDevices[device_found].acDevice, sizeof (pnddDevices[device_found].acDevice));
           log_put(LOG_GROUP, LOG_CATEGORY, NFC_LOG_PRIORITY_DEBUG, "device found: Bus %s Device %s", bus->dirname, dev->filename);
           usb_close(udev);
